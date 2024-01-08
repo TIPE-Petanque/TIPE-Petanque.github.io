@@ -20,11 +20,19 @@ Promise.all([
     }
 });
 */
+
+let angle_initial = 0;
+let angleZ=0;
+const raz = document.getElementById("raz");
+raz.onclick=()=>{
+    angle_initial=angleZ;
+}
+
 window.addEventListener("deviceorientation", (event) => {
-    let angleZ=event.gamma.toFixed(2);
+    angleZ=event.alpha.toFixed(2);
     ori.innerHTML=`${angleZ}`; // : ${event.beta.toFixed(2)} : ${event.gamma.toFixed(2)}`;
     
-    if((angleZ<=90)&&(angleZ<=120)){
+    if((Math.abs(angleZ-angle_initial)>=40)){
         oscillator.frequency.value=440;
     }
     else{
@@ -48,7 +56,7 @@ acl.addEventListener("reading", () =>
     //paZ.innerHTML=`Accélération selon l'axe Z:${aZ}`;
 
         
-    if(aX>3){}
+    
 });
 
 acl.start();
