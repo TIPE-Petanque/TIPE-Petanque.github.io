@@ -8,12 +8,10 @@
 
 <body>
   <select id="voiceSelect"></select>
-
   <button id="raz">Remise à zéro/Réinitialisation de l'orientation. </button>
   <button id="dmr">Démarrer</button>
   <!--Un clic sur le bouton "Démarrer" entraîne l'enregistrement de la position et de l'attitude actuelles du téléphone-->
   <button id="lnc">Lancer</button>
-
   <!--
           Un clic sur le bouton "Lancer" entraîne l'exécution de la procédure suivante:
           1)Appel de la fonction/procédure "réglage azimutal" et attente jusqu'à complétion/réalisation
@@ -30,17 +28,18 @@
         -->
   <button id="alr">Annuler</button>
 
-  <!--<p id="accX">Accélération selon l'axe X:</p>
+  <p id="accX">Accélération selon l'axe X:</p>
   <p id="accY">Accélération selon l'axe Y:</p>
   <p id="accZ">Accélération selon l'axe Z:</p>
   
   <p id="oriZ"> Orientation Z (azimut)</p>
-  -->
+
   <p id="ori"></p>
-  <!--https://codepen.io/jonoliver/pen/NoawPv-->
+
   <select id="wave">
     <option value="sine">sine</option>
   </select>
+
   <input id="volume" type="range" min="0" max="100" value="0" />
   <input id="frequency" type="range" min="110" max="880" value="440" />
   <script src="audio.js"></script>
@@ -48,69 +47,65 @@
 </body>
 <script>
   const paX = document.getElementById("accX");
-const paY = document.getElementById("accY");
-const paZ = document.getElementById("accZ");
+  const paY = document.getElementById("accY");
+  const paZ = document.getElementById("accZ");
 
-const ori = document.getElementById("ori");
+  const ori = document.getElementById("ori");
 
-/*const sensor = new AbsoluteOrientationSensor();
+  /*const sensor = new AbsoluteOrientationSensor();
 
-Promise.all([
-    navigator.permissions.query({ name: "accelerometer" }),
-    navigator.permissions.query({ name: "magnetometer" }),
-    navigator.permissions.query({ name: "gyroscope" }),
-]).then((results) => {
-    if (results.every((result) => result.state === "granted")) {
-        sensor.start();
-        // …
+  Promise.all([
+      navigator.permissions.query({ name: "accelerometer" }),
+      navigator.permissions.query({ name: "magnetometer" }),
+      navigator.permissions.query({ name: "gyroscope" }),
+  ]).then((results) => {
+      if (results.every((result) => result.state === "granted")) {
+          sensor.start();
+          // …
 
-    } else {
-        console.log("No permissions to use AbsoluteOrientationSensor.");
-    }
-});
-*/
+      } else {
+          console.log("No permissions to use AbsoluteOrientationSensor.");
+      }
+  });
+  */
 
-let angle_initial = 0;
-let angleZ=0;
-const raz = document.getElementById("raz");
-raz.onclick=()=>{
-    angle_initial=angleZ;
-}
+  let angle_initial = 0;
+  let angleZ=0;
+  const raz = document.getElementById("raz");
+  raz.onclick=()=>{
+      angle_initial=angleZ;
+  }
 
-window.addEventListener("deviceorientation", (event) => {
-    angleZ=event.gamma.toFixed(2);
-    ori.innerHTML=`${angleZ}`; // : ${event.beta.toFixed(2)} : ${event.gamma.toFixed(2)}`;
-    
-    if((Math.abs(angleZ-angle_initial)>=40)){
-        oscillator.frequency.value=440;
-    }
-    else{
-        oscillator.frequency.value=880;
-    }
-});
+  window.addEventListener("deviceorientation", (event) => {
+      angleZ=event.beta.toFixed(2);
+      ori.innerHTML=`${angleZ}`; // : ${event.beta.toFixed(2)} : ${event.gamma.toFixed(2)}`;
+      
+      if((Math.abs(angleZ-angle_initial)>=40)){
+          oscillator.frequency.value=440;
+      }
+      else{
+          oscillator.frequency.value=880;
+      }
+  });
+  let aX=0;
+  let aY=0;
+  let aZ=0;
+  console.log("works");
+  const acl = new Accelerometer({ frequency: 60 });
 
-let aX=0;
-let aY=0;
-let aZ=0;
-console.log("works");
-const acl = new Accelerometer({ frequency: 60 });
+  acl.addEventListener("reading", () => 
+  {
+      aX=acl.x.toFixed(5);
+      aY=acl.y.toFixed(5);
+      aZ=acl.z.toFixed(5);
+      paX.innerHTML=`Accélération selon l'axe X: ${aX}`;
+      paY.innerHTML=`Accélération selon l'axe Y:${aY}`;
+      paZ.innerHTML=`Accélération selon l'axe Z:${aZ}`;
+          
+      
+  });
 
-acl.addEventListener("reading", () => 
-{
-    aX=acl.x.toFixed(5);
-    aY=acl.y.toFixed(5);
-    aZ=acl.z.toFixed(5);
-    //paX.innerHTML=`Accélération selon l'axe X: ${aX}`;
-    //paY.innerHTML=`Accélération selon l'axe Y:${aY}`;
-    //paZ.innerHTML=`Accélération selon l'axe Z:${aZ}`;
-        
-    
-});
-
-acl.start();
-
-
-
+  acl.start();
 
 </script>
 
