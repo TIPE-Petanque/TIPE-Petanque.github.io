@@ -71,10 +71,13 @@
   */
 
   let angle_initial = 0;
+  let angleX=0;
+  let angleY=0;
   let angleZ=0;
   const raz = document.getElementById("raz");
+  
   raz.onclick=()=>{
-      angle_initial=angleZ;
+      angle_initial=angleX;
   }
 
   window.addEventListener("deviceorientation", (event) => {
@@ -83,9 +86,9 @@
       angleZ=event.gamma.toFixed(2);
       oriX.innerHTML=`${angleX}`;
       oriY.innerHTML=`${angleY}`;
-      oriZ.innerHTML=`${angleZ}`; // : ${event.beta.toFixed(2)} : ${event.gamma.toFixed(2)}`;
+      oriZ.innerHTML=`${angleZ}`; 
       
-      if((Math.abs(angleZ-angle_initial)>=40)){
+      if((Math.abs(angleX-angle_initial)>=40)){
           oscillator.frequency.value=440;
       }
       else{
