@@ -32,9 +32,9 @@
   <p id="accY">Accélération selon l'axe Y:</p>
   <p id="accZ">Accélération selon l'axe Z:</p>
   
+  <p id="oriX"> Orientation X </p>
+  <p id="oriY"> Orientation Y </p>
   <p id="oriZ"> Orientation Z (azimut)</p>
-
-  <p id="ori"></p>
 
   <select id="wave">
     <option value="sine">sine</option>
@@ -49,8 +49,9 @@
   const paX = document.getElementById("accX");
   const paY = document.getElementById("accY");
   const paZ = document.getElementById("accZ");
-
-  const ori = document.getElementById("ori");
+  const oriX= document.getElementById("oriX"); 
+  const oriY= document.getElementById("oriY"); 
+  const oriZ= document.getElementById("oriZ"); 
 
   /*const sensor = new AbsoluteOrientationSensor();
 
@@ -77,8 +78,12 @@
   }
 
   window.addEventListener("deviceorientation", (event) => {
-      angleZ=event.beta.toFixed(2);
-      ori.innerHTML=`${angleZ}`; // : ${event.beta.toFixed(2)} : ${event.gamma.toFixed(2)}`;
+      angleX=event.beta.toFixed(2);
+      angleY=event.alpha.toFixed(2);
+      angleZ=event.gamma.toFixed(2);
+      oriX.innerHTML=`${angleX}`;
+      oriY.innerHTML=`${angleY}`;
+      oriZ.innerHTML=`${angleZ}`; // : ${event.beta.toFixed(2)} : ${event.gamma.toFixed(2)}`;
       
       if((Math.abs(angleZ-angle_initial)>=40)){
           oscillator.frequency.value=440;
@@ -90,9 +95,9 @@
   let aX=0;
   let aY=0;
   let aZ=0;
-  console.log("works");
-  const acl = new Accelerometer({ frequency: 60 });
 
+
+  const acl = new Accelerometer({ frequency: 60 });
   acl.addEventListener("reading", () => 
   {
       aX=acl.x.toFixed(5);
