@@ -85,6 +85,9 @@
   let aX=0;
   let aY=0;
   let aZ=0;
+
+  let aX_tmp=aY_tmp=aZ_tmp=0;
+
   const acl = new Accelerometer({ frequency: 60 });
 
   let sommeX=sommeY=sommeZ=vitesseX=vitesseY=vitesseZ=0;
@@ -96,12 +99,19 @@
 
   acl.addEventListener("reading", () => 
   {
+      aX_tmp=aX;
+      aY_tmp=aY;
+      aZ_tmp=aZ;
+      
       aX=acl.x.toFixed(5);
       aY=acl.y.toFixed(5);
       aZ=acl.z.toFixed(5);
-      vitesseX+=aX*dt;
-      vitesseY+=aY*dt;
-      vitesseZ+=aZ*dt;
+
+
+
+      vitesseX=(aX-aX_tmp)*dt;
+      vitesseY=(aY-aY_tmp)*dt;
+      vitesseZ=(aZ-aZ_tmp)*dt;
 
       normeV=(vitesseX**2+vitesseY**2+vitesseZ**2)**.5;
       paX.innerHTML=`Accélération selon l'axe X: ${aX}`;
