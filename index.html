@@ -1,17 +1,13 @@
 <!DOCTYPE html>
 <html>
-
 <head>
   <meta charset="utf-8">
   <title>Prototype TIPE</title>
 </head>
-
 <body>
-  <select id="voiceSelect"></select>
   <button id="raz">Remise à zéro/Réinitialisation de l'orientation. </button>
-  <button id="dmr">Démarrer</button>
+  <!--<button id="dmr">Démarrer</button>-->
   <!--Un clic sur le bouton "Démarrer" entraîne l'enregistrement de la position et de l'attitude actuelles du téléphone-->
-  <button id="lnc">Lancer</button>
   <!--
           Un clic sur le bouton "Lancer" entraîne l'exécution de la procédure suivante:
           1)Appel de la fonction/procédure "réglage azimutal" et attente jusqu'à complétion/réalisation
@@ -26,7 +22,6 @@
           5)Appel de la fonction/procédure "réglage de la vitesse" et attente jusqu'à complétion/réalisation
           6)Signal à l'utilisateur "Tout est bon, vous pouvez lancer au prochain maximum de hauteur."
         -->
-  <button id="alr">Annuler</button>
 
   <p id="accX">Accélération selon l'axe X:</p>
   <p id="accY">Accélération selon l'axe Y:</p>
@@ -98,8 +93,6 @@
   let aX=0;
   let aY=0;
   let aZ=0;
-
-
   const acl = new Accelerometer({ frequency: 60 });
   acl.addEventListener("reading", () => 
   {
@@ -118,3 +111,4 @@
 </script>
 
 </html>
+

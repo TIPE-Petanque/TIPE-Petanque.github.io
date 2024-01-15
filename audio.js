@@ -41,7 +41,7 @@ function populateVoiceList() {
   
     const voices = speechSynthesis.getVoices();
   
-    for (let i = 0; i < voices.length; i++) {
+    /*for (let i = 0; i < voices.length; i++) {
       const option = document.createElement("option");
       option.textContent = `${voices[i].name} (${voices[i].lang})`;
   
@@ -53,6 +53,7 @@ function populateVoiceList() {
       option.setAttribute("data-name", voices[i].name);
       document.getElementById("voiceSelect").appendChild(option);
     }
+    */
   }
   
   populateVoiceList();
@@ -63,10 +64,11 @@ function populateVoiceList() {
     speechSynthesis.onvoiceschanged = populateVoiceList;
   }
 
-
+/*
 let dmr= document.getElementById("dmr");
 dmr.onclick=()=>{
     let phrase="Position initialisée. Vous pouvez avancer jusqu'au point de tir avant de cliquer sur le bouton";
     let utterance = new SpeechSynthesisUtterance(phrase);
     speechSynthesis.speak(utterance);
 };
+*/
