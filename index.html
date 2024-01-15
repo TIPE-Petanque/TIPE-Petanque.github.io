@@ -88,7 +88,7 @@
 
   let aX_tmp=aY_tmp=aZ_tmp=0;
 
-  const acl = new LinearAccelerationSensor({ frequency: 60 });
+  const acl = new LinearAccelerationSensor({ frequency: 100 });
 
   let sommeX=sommeY=sommeZ=vitesseX=vitesseY=vitesseZ=0;
   const dt=1/60; 
@@ -103,9 +103,9 @@
       aY_tmp=aY;
       aZ_tmp=aZ;
       
-      aX=acl.x.toFixed(5);
-      aY=acl.y.toFixed(5);
-      aZ=acl.z.toFixed(5);
+      aX=acl.x;//.toFixed(5);
+      aY=acl.y;//.toFixed(5);
+      aZ=acl.z;//.toFixed(5);
 
 
 
