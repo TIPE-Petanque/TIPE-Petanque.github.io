@@ -97,7 +97,11 @@
   
   const DUREE_INTEGRATION=1;//Duree en secondes
 
-  setInterval(f=>vitesseX=vitesseY=vitesseZ=0,1000);
+  setInterval(f=>{
+    vitesseX=vitesseX/2;
+    vitesseY=vitesseY/2;
+    vitesseZ=vitesseZ/2;
+  },1000);
 
 
   acl.addEventListener("reading", () => 
